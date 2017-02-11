@@ -1,0 +1,51 @@
+<nav class="sidebar"> 
+    <ul class="list-group">
+        <form class="navbar-form ">
+          <div class="form-group">
+            <input type="text" class="form-control" id="sidebar-search" placeholder="Search">
+          </div>
+        </form>
+
+        <div class="nested-menu" id="good-admin-sidebar">
+            <a  class="list-group-item" (click)="reverseExpand('good')">
+                <i class="glyphicon glyphicon-user"></i> 商品管理 
+                <i class="glyphicon glyphicon-chevron-down" *ngIf="!goodIsExpand"></i>
+                <i class="glyphicon glyphicon-chevron-up" *ngIf="goodIsExpand"></i>
+            </a>
+            <div class="nested" *ngIf="goodIsExpand">
+                <ul class="submenu">
+                    <li>
+                        <a href="" class="list-group-item"><i class="glyphicon glyphicon-user"></i> 新增商品</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['good-list']" [routerLinkActive]="['router-link-active']" class="list-group-item"><i class="glyphicon glyphicon-user"></i> 查询商品</a>
+                    </li>
+                    <li>
+                        <a href="" class="list-group-item"><i class="glyphicon glyphicon-user"></i> 规格参数</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="nested-menu" id="content-admin-sidebar">
+            <a  class="list-group-item" (click)="reverseExpand('content')">
+                <i class="glyphicon glyphicon-user"></i> 网站内容管理
+                <i class="glyphicon glyphicon-chevron-down" *ngIf="!contentIsExpand"></i>
+                <i class="glyphicon glyphicon-chevron-up" *ngIf="contentIsExpand"></i>
+            </a>
+            <div class="nested" *ngIf="contentIsExpand">
+                <ul class="submenu">
+                    <li>
+                        <a href="" class="list-group-item"><i class="glyphicon glyphicon-user"></i> 内容分类管理</a>
+                    </li>
+                    <li>
+                        <a href="" class="list-group-item"><i class="glyphicon glyphicon-user"></i> 内容管理</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <a class="list-group-item"><i class="glyphicon glyphicon-user"></i> 用户管理 </a>
+
+    </ul>
+</nav>

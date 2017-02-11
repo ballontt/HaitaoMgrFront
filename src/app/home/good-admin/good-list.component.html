@@ -1,0 +1,47 @@
+<div  id="good-container">
+    <!--header-->
+    <div class="header">
+        <ol class="breadcrumb" style="text-align: right;display:table;width: 100%">
+            <div style="float:left;font-size:18px">
+                商品查询
+            </div>
+            <li>首页</li>
+            <li>商品管理</li>
+            <li class="active">商品查询</li>
+        </ol>
+    </div>
+    <!--rows-->
+    <div id="good-table">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>商品ID</th>
+                    <th>商品标题</th>
+                    <th>卖点</th>
+                    <th>价格</th>
+                    <th>库存数量</th>
+                    <th>状态</th>
+                    <th>创建日期</th>
+                    <th>更新日期</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let good of goods;let i = index">
+                    <td>{{i + 1}}</td>
+                    <td>{{good.id}}</td>
+                    <td>{{good.title}}</td>
+                    <td>{{good.sellPoint}}</td>
+                    <td>{{good.price}}</td>
+                    <td>{{good.num}}</td>
+                    <td>{{good.status}}</td>
+                    <td>{{good.created}}</td>
+                    <td>{{good.updated}}</td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+    
+    
+</div>

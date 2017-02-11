@@ -1,0 +1,33 @@
+.sidebar {
+   position:fixed;
+   top:51px;
+   bottom:0px;
+   width:12%;
+   background-color: #222222;
+   padding-bottom:40px;
+}
+.sidebar .list-group-item {
+   background-color: #222222;
+   border:#222222;
+   color:#999999;
+   font-size: 14px;
+   padding-top: 14px;
+   padding-bottom: 14px;
+}
+.sidebar .list-group-item:hover {
+    background-color: #151515;
+    color:#FFFFFF;
+    border:#151515;
+}
+#sidebar-search {
+    width:175px;
+}
+
+.glyphicon-chevron-down {
+    float:right;
+    vertical-align: middle
+}
+.glyphicon-chevron-up {
+    float:right;
+    vertical-align: middle
+}
