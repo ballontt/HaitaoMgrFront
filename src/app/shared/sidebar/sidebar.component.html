@@ -15,7 +15,7 @@
             <div class="nested" *ngIf="goodIsExpand">
                 <ul class="submenu">
                     <li>
-                        <a href="" class="list-group-item"><i class="glyphicon glyphicon-user"></i> 新增商品</a>
+                        <a [routerLink]="['good-add']" [routerLinkActive]="['router-link-active']" class="list-group-item"><i class="glyphicon glyphicon-user"></i> 新增商品</a>
                     </li>
                     <li>
                         <a [routerLink]="['good-list']" [routerLinkActive]="['router-link-active']" class="list-group-item"><i class="glyphicon glyphicon-user"></i> 查询商品</a>

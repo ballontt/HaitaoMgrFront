@@ -1,6 +1,6 @@
-<div  id="good-container">
+<div class="good-container">
     <!--header-->
-    <div class="header">
+    <div class="header" class="good-header">
         <ol class="breadcrumb" style="text-align: right;display:table;width: 100%">
             <div style="float:left;font-size:18px">
                 商品查询
@@ -10,38 +10,68 @@
             <li class="active">商品查询</li>
         </ol>
     </div>
-    <!--rows-->
-    <div id="good-table">
-        <table class="table table-hover table-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>商品ID</th>
-                    <th>商品标题</th>
-                    <th>卖点</th>
-                    <th>价格</th>
-                    <th>库存数量</th>
-                    <th>状态</th>
-                    <th>创建日期</th>
-                    <th>更新日期</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let good of goods;let i = index">
-                    <td>{{i + 1}}</td>
-                    <td>{{good.id}}</td>
-                    <td>{{good.title}}</td>
-                    <td>{{good.sellPoint}}</td>
-                    <td>{{good.price}}</td>
-                    <td>{{good.num}}</td>
-                    <td>{{good.status}}</td>
-                    <td>{{good.created}}</td>
-                    <td>{{good.updated}}</td>
-                </tr>
-            </tbody>
-            
-        </table>
+    <!--功能按钮栏-->
+    <div class="btn-group" role="group" style="margin-bottom:8px">
+        <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i>新增</button>
+        <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i>编辑</button>
+        <button type="button" class="btn btn-danger" (click)="showConfirm()"><i class="glyphicon glyphicon-remove"></i>删除</button>
+        <!--确认删除的pop框-->
+        <div id="confirm-pop" *ngIf="isConfirmPop&&selectedGoods.length>0">
+            <div style="padding:10px 16px;">
+                <p style="white-space:nowrap">确认删除{{selectedGoods.length}}条记录？</p>
+                <div class="btn-group btn-group-xs" style="left:17px;">
+                    <button type="button" class="btn btn-danger" (click)="deleteGoods();hideConfirm()">确认</button>
+                    <button type="button" class="btn btn-default" (click)="hideConfirm()">取消</button>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    
+
+    <!--rows-->
+    <div class="good-table">
+        <!--商品表，使用了primeNG UI实现表的可编辑-->
+        <p-dataTable [value]="goods" [(selection)]="selectedGoods">
+            <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+            <p-column field="id" header="商品id"></p-column>
+            <p-column field="title" header="标题" [style]="{'overflow':'hidden'}"></p-column>
+            <p-column field="sellPoint" header="卖点" [style]="{'overflow':'hidden'}"></p-column>
+            <p-column field="price" header="价格"></p-column>
+            <p-column field="num" header="数量"></p-column>
+            <p-column field="status" header="状态"></p-column>
+            <p-column field="created" header="创建时间"></p-column>
+            <p-column field="updated" header="更新时间"></p-column>
+        </p-dataTable>
+        <!--商品表 end-->
+
+        <!--分页功能，使用Bootstrap的样式，主要完成分页的逻辑 start-->
+        <nav *ngIf="pageTotal>=1" aria-label="Page navigation">
+            <ul class="pagination" id="good-pagination">
+                <li [class.disabled]="pageNo===1">
+                    <a aria-label="Previous" (click)="toPage(pageNo-1)">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li [class.active]="pageNo===1"><a (click)="toPage(1)">1</a></li>
+                <li *ngIf="pageTotal>=2" [class.active]="pageNo===2"><a (click)="toPage(2)">2</a></li>
+                <li *ngIf="pageNo>4"><a>...</a></li>
+                <li *ngIf="pageNo<5&&pageTotal>=3" [class.active]="pageNo===3"><a (click)="toPage(3)">3</a></li>
+                <li *ngIf="pageNo<5&&pageTotal>=4" [class.active]="pageNo===4"><a (click)="toPage(4)">4</a></li>
+                <li *ngIf="pageNo<5&&pageTotal>=5" [class.active]="pageNo===5"><a (click)="toPage(5)">5</a></li>
+                <li *ngIf="pageNo>4"><a (click)="toPage(pageNo-2)">{{pageNo-2}}</a></li>
+                <li *ngIf="pageNo>4"><a (click)="toPage(pageNo-1)">{{pageNo-1}}</a></li>
+                <li *ngIf="pageNo>4" class="active"><a (click)="toPage(pageNo)">{{pageNo}}</a></li>
+                <li *ngIf="pageNo>4&&pageNo<=pageTotal-1"><a (click)="toPage(pageNo+1)">{{pageNo+1}}</a></li>
+                <li *ngIf="pageNo>4&&pageNo<=pageTotal-2"><a (click)="toPage(pageNo+2)">{{pageNo+2}}</a></li>
+                <li *ngIf="pageTotal>5&&pageNo<pageTotal-2"><a>...</a></li>
+                <li *ngIf="pageTotal>5&&pageNo<pageTotal-2"><a (click)="toPage(pageTotal)">{{pageTotal}}</a></li>
+                <li [class.disabled]="pageNo===pageTotal" (click)="toPage(pageNo+1)">
+                    <a aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!--分页功能 end-->
+    </div>
+    <!--rows end-->
 </div>

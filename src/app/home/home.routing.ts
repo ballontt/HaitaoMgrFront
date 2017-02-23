@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+import { GoodListComponent } from './good-admin/good-list.component';
+import { GoodAddComponent } from './good-admin/good-add.component';
 import { HomeComponent } from './home.component';
 import { LoggedInGuard } from '../service/logged-in.guard'
-import { GoodListComponent } from './good-admin/good-list.component'
 
 
 const routes: Routes = [
@@ -15,7 +17,12 @@ const routes: Routes = [
             {
                 path:'good-list',
                 component: GoodListComponent
+            },
+            {
+                path:'good-add',
+                component: GoodAddComponent
             }
+
         ]
     },
 ];

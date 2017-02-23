@@ -1,0 +1,11 @@
+.col-sm-1 {
+    padding-right:25px;
+}
+.col-sm-5 {
+    padding-left:0px;
+}
+body .ui-fileupload .ui-fileupload-buttonbar {
+    padding: .75em 1.25em;
+    background-color: white;
+    border-bottom: 0 none;
+}
