@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() { }
     onSubmit() {
-    
          this.userServie.login(this.model.username,this.model.password).subscribe(res=>{
              if(res) {
                  let redirect = this.userServie.redirectUrl ? this.userServie.redirectUrl:'/home';

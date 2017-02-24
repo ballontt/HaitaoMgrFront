@@ -9,3 +9,7 @@ body .ui-fileupload .ui-fileupload-buttonbar {
     background-color: white;
     border-bottom: 0 none;
 }
+
+.not-null{
+    color:rgb(199, 63, 60);
+}

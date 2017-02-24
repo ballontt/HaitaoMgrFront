@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 
 // primeNG
 import { DataTableModule } from 'primeng/primeng';
-import { EditorModule } from 'primeng/primeng';
 import { FileUploadModule } from 'primeng/primeng';
+import { GrowlModule } from 'primeng/primeng';
 import { TreeModule } from 'primeng/primeng';
 import { TreeTableModule} from 'primeng/primeng';
+import { QuillModule } from 'ngx-quill';
+
 
 // ng-bootstrap
 import { HomeRoutingModule } from './home.routing';
@@ -21,12 +23,13 @@ import { SharedModule } from '../shared/Shared.module';
 @NgModule({
     imports: [CommonModule,
               DataTableModule,
-              EditorModule,
               FormsModule,
               FileUploadModule,
+              GrowlModule,
               HomeRoutingModule,
               TreeTableModule,
               TreeModule,
+              QuillModule,
               SharedModule,
               PopoverModule.forRoot()],
     exports: [],

@@ -1,3 +1,4 @@
+<p-growl [value]="saveResult" life="5000"></p-growl>
 <div class="good-container">
     <!--header-->
     <div class="header" class="good-header">
@@ -11,46 +12,57 @@
         </ol>
     </div>
 
-    <form class="form-horizontal">
-        <div class="form-group">
-            <label for="inputEmail3" class="col-sm-1 control-label">商品类目</label>
-            <!--<div class="col-sm-5">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-            </div>-->
-            <!--<p-treeTable [value]="files2" selectionMode="single" [(selection)]="selectedFile" (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)">-->
+    <form class="form-horizontal" (ngSubmit)="onSubmit()" name="form" #itemSaveForm="ngForm">
 
+        <!--商品类目-->
+        <div class="form-group">
+            <label for="cid" class="col-sm-1 control-label">商品类目 <span class="not-null">*</span></label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="cid" name="cid" placeholder="商品分类" [(ngModel)]="item.cid" #goodcid="ngModel" required>
+            </div>
+        </div>
 
-        </div>
+        <!--商品标题-->
         <div class="form-group">
-            <label for="inputPassword3" class="col-sm-1 control-label">商品标题</label>
+            <label for="title" class="col-sm-1 control-label">商品标题 <span class="not-null">*</span></label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="inputPassword3" placeholder="Password">
+                <input type="text" class="form-control" id="title" name="title" placeholder="商品标题" [(ngModel)]="item.title" #goodtitle="ngModel" required>
             </div>
         </div>
+
+        <!--商品卖点-->
         <div class="form-group">
-            <label for="sellpoint" class="col-sm-1 control-label">商品卖点</label>
+            <label for="sellpoint" class="col-sm-1 control-label">商品卖点 <span class="not-null">*</span></label>
             <div class="col-sm-5">
-                <textarea  class="form-control" rows="3" id="sellpoint" placeholder="商品卖点"></textarea>
+                <textarea class="form-control" rows="3" id="sellpoint" name="sellpoint" placeholder="商品卖点" [(ngModel)]="item.sellPoint" #goodsellpoint="ngModel" required></textarea>
             </div>
         </div>
+
+        <!--商品价格-->
         <div class="form-group">
-            <label for="good-price" class="col-sm-1 control-label">商品价格</label>
+            <label for="good-price" class="col-sm-1 control-label">商品价格 <span class="not-null">*</span></label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="good-price" placeholder="商品价格">
+                <input type="text" class="form-control" id="good-price" name="price" placeholder="商品价格" [(ngModel)]="item.price" #goodprice="ngModel" required>
             </div>
         </div>
+
+        <!--库存数量-->
         <div class="form-group">
-            <label for="good-num" class="col-sm-1 control-label">库存数量</label>
+            <label for="good-num" class="col-sm-1 control-label">库存数量 <span class="not-null">*</span></label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="good-num" placeholder="库存数量">
+                <input type="text" class="form-control" id="good-num" name="num" placeholder="库存数量" [(ngModel)]="item.num" #goodnum="ngModel" required>
             </div>
         </div>
+
+        <!--二维码-->
         <div class="form-group">
             <label for="good-scode" class="col-sm-1 control-label">二维码</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="good-scode" placeholder="二维码">
+                <input type="text" class="form-control" id="good-scode" name="barcode" placeholder="二维码" [(ngModel)]="item.barcode">
             </div>
         </div>
+
+        <!--商品图片-->
         <div class="form-group">
             <label for="good-picture" class="col-sm-1 control-label">商品图片</label>
             <p-fileUpload name="picFile" url="http://localhost:8086/picture/upload" accept="image/*" auto="auto" chooseLabel="上传图片" (onUpload)="onUpload($event)">
@@ -63,18 +75,22 @@
                 </template>
             </p-fileUpload>
         </div>
+
+        <!--商品描述-->
         <div class="form-group">
             <label for="good-desc" class="col-sm-1 control-label">商品描述</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="good-desc" placeholder="商品描述">
-                <!--<p-editor [(ngModel)]="descText" [style]="{'height':'320px'}"></p-editor>-->
+                <quill-editor placeholder="输入内容..." [(ngModel)]="item.descText" name="editor">
+                </quill-editor>
             </div>
         </div>
+
+        <!--保存按钮-->
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-5">
-                <button type="submit" class="btn btn-default">保存</button>
+                <button type="submit" class="btn btn-primary">保存</button>
             </div>
         </div>
+
     </form>
-    <p-editor [(ngModel)]="descText" [style]="{'height':'320px'}"></p-editor>
 </div>

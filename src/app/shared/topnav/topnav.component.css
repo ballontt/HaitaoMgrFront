@@ -1,0 +1,3 @@
+.navbar-fixed-bottom, .navbar-fixed-top{
+    z-index:1000;
+}

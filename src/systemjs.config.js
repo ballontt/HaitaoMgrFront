@@ -24,6 +24,7 @@
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
       'ng2-bootstrap/ng2-bootstrap': 'node_modules/ng2-bootstrap/bundles/ng2-bootstrap.umd.js',
       'primeng': 'npm:primeng',
+      'ngx-quill': 'node_modules/ngx-quill/bundles/ngx-quill.umd.js',
       'quill':'node_modules/quill/dist/quill.js',
 
       // other libraries
@@ -40,7 +41,16 @@
       },
       primeng: {
           defaultExtension: 'js'
-      }
+      },
+      'ngx-quill': {
+    format: 'cjs',
+    meta: {
+      deps: ['quill']
+    }
+  },
+  'quill': {
+    format: 'cjs'
+  }
     }
   });
 })(this);
