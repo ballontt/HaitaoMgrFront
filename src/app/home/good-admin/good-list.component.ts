@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { GoodService } from './service/good.service';
-import { Good } from './service/good';
+import { Good } from './service/data-structure';
+import { Message } from 'primeng/primeng';
 
 @Component({
     moduleId: module.id,
@@ -15,6 +16,7 @@ export class GoodListComponent implements OnInit {
     pageTotal:number;
     pageNo:number;
     isConfirmPop:Boolean = false;
+    operatorResult: Message[] = [];
   
     constructor(private goodService: GoodService) { }
 
@@ -38,7 +40,7 @@ export class GoodListComponent implements OnInit {
             .then(res=>{
                 this.pageTotal = res.totalPage;
                 this.pageNo = res.currentPage;
-                this.goods = <Good[]>res.tbItemlist;
+                this.goods = <Good[]>res.tbList;
             });
      }
 
@@ -61,8 +63,9 @@ export class GoodListComponent implements OnInit {
                     if(isSuccess) {
                         this.selectedGoods = null;
                         this.toPage(this.pageNo);
+                        this.operatorResult.push({severity:'success', summary:'删除成功', detail:'删除商品记录成功'});
                     }else{
-                        alert("删除失败");
+                        this.operatorResult.push({severity:'error', summary:'删除失败', detail:'删除商品记录失败'});
                     }
                 });
          }

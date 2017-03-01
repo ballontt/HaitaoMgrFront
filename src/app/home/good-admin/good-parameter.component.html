@@ -1,27 +1,64 @@
-<p-growl [value]="operatorResult" life="5000"></p-growl>
+<p-growl [value]="saveResult" life="5000"></p-growl>
 <div class="good-container">
     <!--header-->
     <div class="header" class="good-header">
         <ol class="breadcrumb" style="text-align: right;display:table;width: 100%">
             <div style="float:left;font-size:18px">
-                商品查询
+                规格参数
             </div>
             <li>首页</li>
             <li>商品管理</li>
-            <li class="active">商品查询</li>
+            <li class="active">规格参数</li>
         </ol>
     </div>
+
     <!--功能按钮栏-->
     <div class="btn-group" role="group" style="margin-bottom:8px">
-        <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i>新增</button>
+        <button type="button" class="btn btn-default" (click)="showModal()"><i class="glyphicon glyphicon-plus"></i>新增</button>
         <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i>编辑</button>
-        <button type="button" class="btn btn-danger" (click)="showConfirm()"><i class="glyphicon glyphicon-remove"></i>删除</button>
+        <button type="button" class="btn btn-danger" (click)="showConfirm()"><i class="glyphicon glyphicon-remove" style="color:aliceblue"></i>删除</button>
+
+        <!--新增功能的modal框-->
+        <p-dialog header="新增规格参数" [(visible)]="addModal" modal="modal" responsive="true" width="600" (onAfterHide)="afterHide()">
+            <tr>
+                <td>商品类目:</td>
+                <td class="col-sm-5"><input type="text" [(ngModel)]="cid"></td>
+            </tr>
+            <tr style="margin-top: 5px">
+                <td>规格参数</td>
+                <td>
+                    <ul>
+                        <li class="param-input">
+                            <button (click)="appendGroup()">添加分组</button>
+                        </li>
+                        <li *ngFor="let parameter of parameters;let i = index" class="param-input">
+                            <input tyle="text" [(ngModel)]="parameter.group" />&nbsp;
+                            <a (click)="appendParameter(i)" class="glyphicon glyphicon-plus" style="color:black"></a>
+                            <ul>
+                                <li *ngFor="let p of parameter.params" class="param-input">
+                                    <input type="text" [(ngModel)]="p.k" />&nbsp;
+                                    <a href="javascript:void(0)" class="glyphicon glyphicon-remove"></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <p-footer>
+                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                    <button type="button" class="btn btn-default" (click)="hideModal()"><i class="glyphicon glyphicon-remove dander"></i>取消</button>
+                    <button type="button" class="btn btn-default" (click)="saveCatParams();hideModal()"><i class="glyphicon glyphicon-ok"></i>保存</button>
+                </div>
+            </p-footer>
+        </p-dialog>
+
+
         <!--确认删除的pop框-->
-        <div id="confirm-pop" *ngIf="isConfirmPop&&selectedGoods.length>0">
+        <div id="confirm-pop" *ngIf="isConfirmPop&&selectedCats.length>0">
             <div style="padding:10px 16px;">
-                <p style="white-space:nowrap">确认删除{{selectedGoods.length}}条记录？</p>
+                <p style="white-space:nowrap">确认删除{{selectedCats.length}}条记录？</p>
                 <div class="btn-group btn-group-xs" style="left:17px;">
-                    <button type="button" class="btn btn-danger" (click)="deleteGoods();hideConfirm()">确认</button>
+                    <button type="button" class="btn btn-danger" (click)="deleteCatParams();hideConfirm()">确认</button>
                     <button type="button" class="btn btn-default" (click)="hideConfirm()">取消</button>
                 </div>
             </div>
@@ -31,22 +68,20 @@
 
     <!--rows-->
     <div class="good-table">
+
         <!--商品表，使用了primeNG UI实现表的可编辑-->
-        <p-dataTable [value]="goods" [(selection)]="selectedGoods">
+        <p-dataTable [value]="catParameters" [(selection)]="selectedCats">
             <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-            <p-column field="id" header="商品id"></p-column>
-            <p-column field="title" header="标题" [style]="{'overflow':'hidden'}"></p-column>
-            <p-column field="sellPoint" header="卖点" [style]="{'overflow':'hidden'}"></p-column>
-            <p-column field="price" header="价格"></p-column>
-            <p-column field="num" header="数量"></p-column>
-            <p-column field="status" header="状态"></p-column>
+            <p-column field="id" header="规格id"></p-column>
+            <p-column field="itemCatId" header="分类ID"></p-column>
+            <p-column field="paramData" header="规格参数"></p-column>
             <p-column field="created" header="创建时间"></p-column>
             <p-column field="updated" header="更新时间"></p-column>
         </p-dataTable>
         <!--商品表 end-->
 
         <!--分页功能，使用Bootstrap的样式，主要完成分页的逻辑 start-->
-        <nav *ngIf="pageTotal>=1" aria-label="Page navigation">
+        <nav *ngIf="pageTotal>1" aria-label="Page navigation">
             <ul class="pagination" id="good-pagination">
                 <li [class.disabled]="pageNo===1">
                     <a aria-label="Previous" (click)="toPage(pageNo-1)">
@@ -76,4 +111,5 @@
         <!--分页功能 end-->
     </div>
     <!--rows end-->
+
 </div>

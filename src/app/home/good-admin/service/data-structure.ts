@@ -10,3 +10,16 @@ export class Good {
     created: String;
     updated: String;
 }
+
+export class CatParameter {
+    id: number;
+    itemCatId: number;
+    paramData: String;
+    created: String;
+    updated: String;
+}
+
+export class Parameter {
+    group:String;
+    params:String[];
+}
